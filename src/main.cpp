@@ -25,10 +25,11 @@ Usage: tool <src> <dst>
 4 55 3
 
 <dst> - file for transposed matrix:
-                   3                   24                    4\n
-                  45                    5                   55\n
-                   5                    4                    3\n
-)";
+3                    24                   4\n
+45                   5                    55\n
+5                    4                    3\n
+
+"\n" is LF (0x0A))";
 
 logger_t g_logger;
 std::mutex g_logger_mutex; // for logging from threads
