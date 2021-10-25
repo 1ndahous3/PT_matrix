@@ -50,7 +50,7 @@ size_t parse_rows_count(std::ifstream& ifs) {
 }
 
 size_t get_lines_count(std::ifstream& ifs) {
-    return std::count(std::istreambuf_iterator<char>(ifs), std::istreambuf_iterator<char>(), '\n') + 1;
+    return (size_t)std::count(std::istreambuf_iterator<char>(ifs), std::istreambuf_iterator<char>(), '\n') + 1;
 }
 
 void line_worker(size_t line,
@@ -82,16 +82,25 @@ void line_worker(size_t line,
 
         ifs >> elem;
 
-        if (ifs.bad()) {
+        if (ifs.fail()) {
 
             std::lock_guard g(g_logger_mutex);
-            g_logger.log_error() << "unable to get elem, line = " << line << std::endl;
+            g_logger.log_error() << "invalid uint64_t elem, line = " << line << ", elem = " << i << std::endl;
 
             need_stop = true;
             return;
         }
 
-        if (ifs.eof() && i ) {
+        if (ifs.bad()) {
+
+            std::lock_guard g(g_logger_mutex);
+            g_logger.log_error() << "unable to get elem, line = " << line << ", elem = " << i << std::endl;
+
+            need_stop = true;
+            return;
+        }
+
+        if (ifs.eof() && i != rows - 1) {
 
             std::lock_guard g(g_logger_mutex);
             g_logger.log_error() << "invalid content, line = " << line << ", elem = " << i << std::endl;
