@@ -1,0 +1,6 @@
+*.user
+/msvc/.vs/*
+/msvc/Debug/*
+/msvc/Release/*
+/msvc/Win32/*
+/msvc/x64/*
