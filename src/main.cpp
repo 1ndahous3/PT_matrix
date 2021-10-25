@@ -109,7 +109,7 @@ void line_worker(size_t line,
             return;
         }
 
-        ofs.seekp(ELEMENT_WIDTH * (rows * i + line));
+        ofs.seekp(ELEMENT_WIDTH * (lines * i + line));
         ofs << std::setfill(' ') << std::setw(NATURAL_NUMBER_MAX_DIGITS) << elem << ((line == lines - 1) ? '\n' : ' ');
     }
 
