@@ -34,6 +34,8 @@ public:
                         break;
                     }
 
+                    g.unlock();
+
                     std::this_thread::sleep_for(std::chrono::microseconds(1000));
                     continue;
                 }
