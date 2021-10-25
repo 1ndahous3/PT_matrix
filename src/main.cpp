@@ -119,7 +119,7 @@ void line_worker(size_t line,
 
         if (ifs.bad()) {
             std::lock_guard g(g_logger_mutex);
-            g_logger.log_error() << "unable to perform end elems checking, line = " << line << std::endl;
+            g_logger.log_error() << "unable to check end elems, line = " << line << std::endl;
 
             need_stop = true;
             return;
